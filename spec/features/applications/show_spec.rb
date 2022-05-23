@@ -155,7 +155,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       visit "/applications/#{application2.id}"
 
       fill_in(:search, with: "Clawdia")
-      click_button("Search")
+      click_button("Submit")
 
 
       expect(page).to have_content("Clawdia")
@@ -189,7 +189,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       expect(page).to have_content(application2.name)
 
       fill_in(:search, with: "Ann")
-      click_button("Search")
+      click_button("Submit")
 
       click_button "Adopt #{pet_3.name}"
 
@@ -218,7 +218,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       expect(page).to have_content(application2.name)
 
       fill_in(:search, with: "Ann")
-      click_button("Search")
+      click_button("Submit")
 
       expect(page).to have_content(pet_1.name)
       expect(page).to have_content(pet_2.name)
@@ -251,7 +251,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       pet_application_1 = PetApplication.create!(pet: @pet_3, application: @application2)
 
       visit "/applications/#{@application2.id}"
-
+      save_and_open_page
       expect(page).to have_content("Please enter why you would make a good home for these pet(s)")
     end
 
@@ -293,7 +293,7 @@ RSpec.describe 'Application Show Page', type: :feature do
 
     it 'can return pets whose name partially matches a search' do 
       fill_in(:search, with: "Ann")
-      click_button("Search")
+      click_button("Submit")
 
       expect(page).to have_content("Annabelle")
       expect(page).to have_content("Ann")
@@ -302,7 +302,7 @@ RSpec.describe 'Application Show Page', type: :feature do
 
       visit "/applications/#{@application2.id}"
       fill_in(:search, with: "n")
-      click_button("Search")
+      click_button("Submit")
 
       expect(page).to have_content("Annabelle")
       expect(page).to have_content("Ann")
@@ -312,7 +312,7 @@ RSpec.describe 'Application Show Page', type: :feature do
     
     it 'produces results even if case is different' do 
       fill_in(:search, with: "aNn")
-      click_button("Search")
+      click_button("Submit")
 
       expect(page).to have_content("Annabelle")
       expect(page).to have_content("Ann")
@@ -321,7 +321,7 @@ RSpec.describe 'Application Show Page', type: :feature do
 
       visit "/applications/#{@application2.id}"
       fill_in(:search, with: "ANN")
-      click_button("Search")
+      click_button("Submit")
 
       expect(page).to have_content("Annabelle")
       expect(page).to have_content("Ann")

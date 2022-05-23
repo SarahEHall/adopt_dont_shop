@@ -14,7 +14,7 @@
     <%= render partial: "shared/pet_search", locals: {
       path: "/applications/#{@application.id}",
       method: :get,
-      button_text: 'Search'} %>
+      button_text: "Submit"} %>
   <% if params[:search] %>
     <% @pets.each do |pet| %>
       <h3><%= pet.name %></h3>
