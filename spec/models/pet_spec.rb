@@ -75,6 +75,7 @@ RSpec.describe Pet, type: :model do
         expect(pet_1.app_status(application1.id)).to eq(nil)
         expect(pet_2.app_status(application1.id)).to eq("Approved")
         expect(pet_1.app_status(application2.id)).to eq("Rejected")
+        expect(pet_1.app_status(application1.id)).to_not eq("Approved")
       end
     end
   end
