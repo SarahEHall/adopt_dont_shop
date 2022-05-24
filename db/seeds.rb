@@ -40,7 +40,7 @@ application1 = Application.create!(
     state: 'TX',
     zip_code: 76119,
     description: 'I just really love animals',
-    status: 'Rejected'
+    status: 3
 )
 application2 = Application.create!(
     name: 'Carol Baskins',
@@ -49,7 +49,7 @@ application2 = Application.create!(
     state: 'FL',
     zip_code: 33625,
     description: 'I just really love animals more than that other guy',
-    status: 'Rejected'
+    status: 3
 )
 application3 = Application.create!(
     name: 'Steve Irwin',
@@ -58,7 +58,7 @@ application3 = Application.create!(
     state: 'NSW-AU',
     zip_code: 20000,
     description: 'Big fan of animals.',
-    status: 'Approved'
+    status: 2
 )
 application4 = Application.create!(
     name: 'Mister Rogers',
@@ -67,7 +67,7 @@ application4 = Application.create!(
     state: 'Ontario',
     zip_code: 66777,
     description: 'I just wanna shine a little light in their little lives.',
-    status: 'Approved'
+    status: 2
 )
 
 pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
