@@ -72,7 +72,7 @@ RSpec.describe Pet, type: :model do
         pet_application_2 = PetApplication.create!(pet: pet_2, application: application1, status: "Approved")
         pet_application_3 = PetApplication.create!(pet: pet_1, application: application2, status: "Rejected")
 
-        expect(pet_1.app_status(application1.id)).to eq(nil)
+        expect(pet_1.app_status(application1.id)).to eq("")
         expect(pet_2.app_status(application1.id)).to eq("Approved")
         expect(pet_1.app_status(application2.id)).to eq("Rejected")
         expect(pet_1.app_status(application1.id)).to_not eq("Approved")

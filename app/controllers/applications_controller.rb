@@ -8,7 +8,7 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    application.update(description: params[:description], status: "Pending")
+    application.update(description: params[:description], status: 1)
     redirect_to "/applications/#{params[:id]}"
   end
 

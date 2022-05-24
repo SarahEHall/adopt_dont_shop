@@ -43,7 +43,7 @@ RSpec.describe 'admin shelters index', type: :feature do
         street_address: '123 Conch Ln',
         city: 'Bikini Bottom',
         state: 'Despair',
-        zip_code: 00425,
+        zip_code: 42500,
         description: 'RIP Gary, need a new one',
         status: 'Pending'
       )
