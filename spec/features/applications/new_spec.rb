@@ -33,8 +33,9 @@ RSpec.describe 'Application New Page', type: :feature do
      fill_in(:zip_code, with: 80250)
      click_on('Submit')
 
-     expect(current_path).to eq('/applications/new')
      expect(page).to have_content('Application not created: Required information missing')
+     expect(page).to have_field('Name')
+     expect(page).to_not have_content("Spongebob")
    end
  end
 end

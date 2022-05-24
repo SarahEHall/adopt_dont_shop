@@ -43,7 +43,7 @@ RSpec.describe 'admin shelters index', type: :feature do
         street_address: '123 Conch Ln',
         city: 'Bikini Bottom',
         state: 'Despair',
-        zip_code: 00425,
+        zip_code: 42500,
         description: 'RIP Gary, need a new one',
         status: 'Pending'
       )
@@ -74,7 +74,11 @@ RSpec.describe 'admin shelters index', type: :feature do
       pet_application_8 = PetApplication.create!(pet: pet_2, application: application4)
       pet_application_9 = PetApplication.create!(pet: pet_4, application: application4)
       pet_application_10 = PetApplication.create!(pet: pet_5, application: application3)
+
       visit '/admin/shelters'
+      expect(page).to have_content(shelter_1.name)
+      expect(page).to have_content(shelter_2.name)
+      expect(page).to have_content(shelter_3.name)
 
       within "#pendingApplications" do 
         expect(page).to have_content("Shelter's with Pending Applications")

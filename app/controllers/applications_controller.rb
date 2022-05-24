@@ -8,7 +8,7 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    application.update(description: params[:description], status: "Pending")
+    application.update(description: params[:description], status: 1)
     redirect_to "/applications/#{params[:id]}"
   end
 
@@ -21,7 +21,7 @@ class ApplicationsController < ApplicationController
         redirect_to "/applications/#{new_app.id}"
       else
         flash[:notice] = "Application not created: Required information missing"
-        redirect_to "/applications/new"
+        render :new
      end
   end
 

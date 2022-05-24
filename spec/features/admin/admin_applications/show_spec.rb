@@ -14,7 +14,7 @@ RSpec.describe 'admin applications show page', type: :feature do
           state: 'Confusion',
           zip_code: 42070,
           description: "I'm really lonely.",
-          status: 'Pending'
+          status: 1
       )
       pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
       pet_application_2 = PetApplication.create!(pet: pet_2, application: application1)
@@ -39,7 +39,7 @@ RSpec.describe 'admin applications show page', type: :feature do
           state: 'Confusion',
           zip_code: 42070,
           description: "I'm really lonely.",
-          status: 'Pending'
+          status: 1
       )
       pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
       pet_application_2 = PetApplication.create!(pet: pet_2, application: application1)
@@ -66,7 +66,7 @@ RSpec.describe 'admin applications show page', type: :feature do
           state: 'Confusion',
           zip_code: 42070,
           description: "I'm really lonely.",
-          status: 'Pending'
+          status: 1
       )
       pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
       pet_application_2 = PetApplication.create!(pet: pet_2, application: application1)
@@ -78,6 +78,7 @@ RSpec.describe 'admin applications show page', type: :feature do
 
         expect(page).to have_current_path("/admin/applications/#{application1.id}")
         expect(page).to have_content("#{pet_1.name}: Rejected")
+        expect(page).to_not have_content("#{pet_1.name}: Approved")
       end
     end
 
@@ -93,7 +94,7 @@ RSpec.describe 'admin applications show page', type: :feature do
           state: 'Confusion',
           zip_code: 42070,
           description: "I'm really lonely.",
-          status: 'Pending'
+          status: 1
       )
       pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
       pet_application_2 = PetApplication.create!(pet: pet_2, application: application1)
@@ -113,14 +114,16 @@ RSpec.describe 'admin applications show page', type: :feature do
 
         expect(page).to have_current_path("/admin/applications/#{application1.id}")
         expect(page).to have_content("#{pet_2.name}: Rejected")
+        expect(page).to_not have_button("Approve #{pet_1.name}")
       end
 
       expect(page).to have_content("#{pet_2.name}: Rejected")
       expect(page).to have_content("#{pet_1.name}: Approved")
+      expect(page).to_not have_content("#{pet_2.name}: Approved")
     end
   end
 
-  describe 'Approved/Rejected Petso n one Application do not affect other Applications' do 
+  describe 'Approved/Rejected Pets on one Application do not affect other Applications' do 
     it 'can test impartiality of individual applications for the same pet' do
       shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
       pet_1 = shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
@@ -133,7 +136,7 @@ RSpec.describe 'admin applications show page', type: :feature do
           state: 'Confusion',
           zip_code: 42070,
           description: "I'm really lonely.",
-          status: 'Pending'
+          status: 1
       )
 
       application2 = Application.create!(
@@ -143,7 +146,7 @@ RSpec.describe 'admin applications show page', type: :feature do
           state: 'FL',
           zip_code: 33625,
           description: 'I just really love animals more than that other guy',
-          status: 'Pending'
+          status: 1
       )
 
       pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
