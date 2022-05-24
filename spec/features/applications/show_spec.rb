@@ -15,7 +15,7 @@ RSpec.describe 'Application Show Page', type: :feature do
           state: 'TX',
           zip_code: 76119,
           description: 'I just really love animals',
-          status: 'Rejected'
+          status: 3
       )
       application2 = Application.create!(
           name: 'Carol Baskins',
@@ -24,7 +24,7 @@ RSpec.describe 'Application Show Page', type: :feature do
           state: 'FL',
           zip_code: 33625,
           description: 'I just really love animals more than that other guy',
-          status: 'Rejected'
+          status: 3
       )
 
       pet_application_1 = PetApplication.create!(pet: pet_1, application: application1)
@@ -66,7 +66,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'TX',
         zip_code: 76119,
         description: 'I just really love animals',
-        status: 'Rejected'
+        status: 3
     )
     application2 = Application.create!(
         name: 'Carol Baskins',
@@ -75,7 +75,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'FL',
         zip_code: 33625,
         description: 'I just really love animals more than that other guy',
-        status: 'Rejected'
+        status: 3
     )
     pet_application1 = PetApplication.create!(pet: pet_1, application: application1)
     pet_application2 = PetApplication.create!(pet: pet_2, application: application2)
@@ -115,7 +115,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'TX',
         zip_code: 76119,
         description: 'I just really love animals',
-        status: 'Rejected'
+        status: 3
       )
 
       application2 = Application.create!(
@@ -125,14 +125,14 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'Despair',
         zip_code: 33025,
         description: "I'm ready!",
-        status: 'In Progress'
+        status: 0
       )
       visit "/applications/#{application1.id}"
 
       expect(page).to_not have_content("Add a Pet to this Application")
 
       visit "/applications/#{application2.id}"
-      save_and_open_page
+      # save_and_open_page
       expect(page).to have_content("Add a Pet to this Application")
     end
 
@@ -149,7 +149,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'Despair',
         zip_code: 33025,
         description: "I'm ready!",
-        status: 'In Progress'
+        status: 0
       )
 
       visit "/applications/#{application2.id}"
@@ -182,7 +182,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'Despair',
         zip_code: 33025,
         description: "I'm ready!",
-        status: 'In Progress'
+        status: 0
       )
 
       visit "/applications/#{application2.id}"
@@ -211,7 +211,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'Despair',
         zip_code: 33025,
         description: "I'm ready!",
-        status: 'In Progress'
+        status: 0
       )
 
       visit "/applications/#{application2.id}"
@@ -240,7 +240,7 @@ RSpec.describe 'Application Show Page', type: :feature do
         state: 'Despair',
         zip_code: 33025,
         description: "",
-        status: 'In Progress'
+        status: 0
       )
     end
     it 'shows up when application has pets and does not show up when application has no pets' do
@@ -251,7 +251,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       pet_application_1 = PetApplication.create!(pet: @pet_3, application: @application2)
 
       visit "/applications/#{@application2.id}"
-      save_and_open_page
+      # save_and_open_page
       expect(page).to have_content("Please enter why you would make a good home for these pet(s)")
     end
 
@@ -285,7 +285,7 @@ RSpec.describe 'Application Show Page', type: :feature do
           state: 'Despair',
           zip_code: 33025,
           description: "",
-          status: 'In Progress'
+          status: 0
       )
 
       visit "/applications/#{@application2.id}"
