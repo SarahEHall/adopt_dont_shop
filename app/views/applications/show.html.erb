@@ -3,12 +3,16 @@
 <p><%= "Full address: #{@application.street_address}, #{@application.city}, #{@application.state} #{@application.zip_code}" %></p>
 <p><%= "Applicant statement: #{@application.description}" %></p>
 
+<div id="appliedFor">
 <p> Pet(s) applied for:  </p>
 <% @application.pets.each do |pet_applied| %>
   <%= link_to "#{pet_applied.name}", "/pets/#{pet_applied.id}" %>
 <% end %>
+</div>
 
+<div id="applicationStatus">
 <p> Application Status: <%= @application.status %></p>
+</div>
 <% if @application.status == "In Progress" %>
   <p>Add a Pet to this Application</p>
     <%= render partial: "shared/pet_search", locals: {
@@ -20,7 +24,7 @@
       <h3><%= pet.name %></h3>
       <p>Age: <%= pet.age %></p>
       <p>Breed: <%= pet.breed %></p>
-      <p>Adoptable: </p>
+      <p>Adoptable: <%=pet.adoptable %></p>
       <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
       <%= button_to "Adopt #{pet.name}", "/pet_applications/new", method: :post, params: {pet_id: pet.id, application_id: @application.id} %>
     <% end %>
