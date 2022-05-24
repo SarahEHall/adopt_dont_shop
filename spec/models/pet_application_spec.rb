@@ -9,5 +9,6 @@ RSpec.describe PetApplication, type: :model do
   describe 'validations' do 
     it { should validate_presence_of(:application_id) }
     it { should validate_presence_of(:pet_id) }
+    it { should define_enum_for(:status).with(["", :Approved, :Rejected])}
   end
 end
