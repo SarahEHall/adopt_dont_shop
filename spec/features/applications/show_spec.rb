@@ -132,7 +132,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       expect(page).to_not have_content("Add a Pet to this Application")
 
       visit "/applications/#{application2.id}"
-
+      save_and_open_page
       expect(page).to have_content("Add a Pet to this Application")
     end
 
