@@ -136,14 +136,13 @@ RSpec.describe 'Application Show Page', type: :feature do
       expect(page).to have_content("#{pet_2.breed}")
       expect(page).to have_content("#{pet_2.age}")
 
-
       expect(page).to_not have_content("#{pet_1.name}")
       expect(page).to_not have_content("#{pet_3.name}")
     end
   end
 
   describe 'Add a Pet to an Application' do
-    it 'has a button to adopt a pet' do
+    it 'has a button to choose pet for adoption' do
       visit "/applications/#{application3.id}"
       expect(page).to have_content(application3.name)
 
