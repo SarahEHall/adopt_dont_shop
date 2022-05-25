@@ -72,7 +72,7 @@ RSpec.describe 'Application Show Page', type: :feature do
   describe 'visuals' do
     it 'can show attributes of the application' do
       visit "/applications/#{application1.id}"
-      # save_and_open_page
+
       expect(page).to have_content(application1.name)
       expect(page).to have_content("Full address: 3150 Horton Rd, Fort Worth, TX 76119")
       expect(page).to have_content(application1.description)
@@ -81,21 +81,25 @@ RSpec.describe 'Application Show Page', type: :feature do
       expect(page).to_not have_content('Carol Baskins')
       expect(page).to_not have_content("Full address: 12802 Easy St, Tampa, fL 33625")
       expect(page).to_not have_content('I just really love animals more than that other guy')
-
-      click_link "#{pet_1.name}"
+      within "#appliedFor#{pet_1.id}" do
+        click_link "#{pet_1.name}"
+      end
       expect(current_path).to eq("/pets/#{pet_1.id}")
-      expect(page).to have_content(pet_1.name)
+      expect(page).to have_content("Mr. Pirate")
 
       visit "/applications/#{application2.id}"
 
-      expect(page).to have_link("#{pet_2.name}")
-      expect(page).to have_link("#{pet_3.name}")
-    end 
+      within "#appliedFor#{pet_2.id}" do
+        expect(page).to have_link("#{pet_2.name}")
+      end
+      within "#appliedFor#{pet_3.id}" do
+        expect(page).to have_link("#{pet_3.name}")
+      end
+    end
   end
 
   it 'can test for multiple pets' do
     visit "/applications/#{application2.id}"
-    # save_and_open_page
     expect(page).to have_content(application2.name)
     expect(page).to have_content("Full address: #{application2.street_address}, #{application2.city}, #{application2.state} #{application2.zip_code}")
     expect(page).to have_content(application2.description)
@@ -120,8 +124,9 @@ RSpec.describe 'Application Show Page', type: :feature do
 
       expect(page).to_not have_content("Add a Pet to this Application")
 
+
       visit "/applications/#{application3.id}"
-      # save_and_open_page
+
       expect(page).to have_content("Add a Pet to this Application")
     end
 
@@ -131,13 +136,20 @@ RSpec.describe 'Application Show Page', type: :feature do
       fill_in(:search, with: "Clawdia")
       click_button("Submit")
 
-
       expect(page).to have_content("Clawdia")
       expect(page).to have_content("#{pet_2.breed}")
       expect(page).to have_content("#{pet_2.age}")
 
       expect(page).to_not have_content("#{pet_1.name}")
       expect(page).to_not have_content("#{pet_3.name}")
+
+      within "#petEntry#{pet_2.id}" do
+        expect(page).to have_content("Clawdia")
+        expect(page).to have_content("#{pet_2.breed}")
+        expect(page).to have_content("#{pet_2.age}")
+        expect(page).to_not have_content("#{pet_1.name}")
+        expect(page).to_not have_content("#{pet_3.name}")
+      end
     end
   end
 
@@ -149,7 +161,9 @@ RSpec.describe 'Application Show Page', type: :feature do
       fill_in(:search, with: "Ann")
       click_button("Submit")
 
-      click_button "Adopt #{pet_3.name}"
+      within "#petEntry#{pet_3.id}" do
+        click_button "Adopt #{pet_3.name}"
+      end
 
       expect(current_path).to eq("/applications/#{application3.id}")
       expect(page).to have_link("#{pet_3.name}")
@@ -168,6 +182,12 @@ RSpec.describe 'Application Show Page', type: :feature do
       expect(page).to have_content(pet_5.name)
       expect(page).to have_content(pet_6.name)
       expect(page).to_not have_content(pet_7.name)
+
+
+      # application2.pets.each do |pet|
+      #   expect(page).to have_content(pet.name) Why can we not use this?
+      # end
+
     end
   end
 
@@ -180,7 +200,7 @@ RSpec.describe 'Application Show Page', type: :feature do
       PetApplication.create!(pet: pet_6, application: application3)
 
       visit "/applications/#{application3.id}"
-      # save_and_open_page
+
       expect(page).to have_content("Please enter why you would make a good home for these pet(s)")
     end
 
@@ -203,6 +223,7 @@ RSpec.describe 'Application Show Page', type: :feature do
   describe 'wonky matches for pet search' do 
     it 'can return pets whose name partially matches a search' do
       visit "/applications/#{application3.id}"
+
       fill_in(:search, with: "Ann")
       click_button("Submit")
 
@@ -223,6 +244,7 @@ RSpec.describe 'Application Show Page', type: :feature do
     
     it 'produces results even if case is different' do
       visit "/applications/#{application3.id}"
+
       fill_in(:search, with: "aNn")
       click_button("Submit")
 
