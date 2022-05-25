@@ -12,7 +12,7 @@
 <% end %>
 
 
-<p> Application Status: <%= @application.status %></p>
+<p><%= "Application Status: #{@application.status}" %></p>
 <% if @application.status == "In Progress" %>
   <p>Add a Pet to this Application</p>
     <%= render partial: "shared/search", locals: {
@@ -22,11 +22,11 @@
   <% if params[:search] %>
     <% @pets.each do |pet| %>
     <div id="petEntry<%= pet.id %>">
-      <h3><%= pet.name %></h3>
-      <p>Age: <%= pet.age %></p>
-      <p>Breed: <%= pet.breed %></p>
-      <p>Adoptable: <%=pet.adoptable %></p>
-      <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
+      <h3><%= "#{pet.name}" %></h3>
+      <p><%= "Age: #{pet.age}" %></p>
+      <p><%= "Breed: #{pet.breed}" %></p>
+      <p><%= "Adoptable: #{pet.adoptable}" %></p>
+      <p><%= "You can find #{pet.name} at #{pet.shelter_name}!" %></p>
       <%= button_to "Adopt #{pet.name}", "/pet_applications/new", method: :post, params: {pet_id: pet.id, application_id: @application.id} %>
       </div>
     <% end %>
