@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Application New Page', type: :feature do
-  describe 'form' do
+  describe 'new application form' do
     it 'has a form to input attributes' do
       visit "/applications/new"
 
