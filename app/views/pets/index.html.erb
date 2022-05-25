@@ -1,9 +1,6 @@
 <h1>All pets</h1>
 
-<%= render partial: "shared/pet_search", locals: {
-  path: "/pets",
-  method: :get,
-  button_text: 'Search'} %>
+<%= render partial: "shared/search", locals: { path: "/pets", method: :get, button_text: 'Search'} %>
 
 <%= link_to "Start an Application", "/applications/new" %>
 

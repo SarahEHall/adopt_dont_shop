@@ -15,7 +15,7 @@
 </div>
 <% if @application.status == "In Progress" %>
   <p>Add a Pet to this Application</p>
-    <%= render partial: "shared/pet_search", locals: {
+    <%= render partial: "shared/search", locals: {
       path: "/applications/#{@application.id}",
       method: :get,
       button_text: "Submit"} %>
