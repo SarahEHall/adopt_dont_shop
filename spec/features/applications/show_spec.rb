@@ -3,13 +3,41 @@ require 'rails_helper'
 RSpec.describe 'Application Show Page', type: :feature do
   let!(:shelter_1) { Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) }
 
-  let!(:pet_1) { shelter_1.pets.create!(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true) }
-  let!(:pet_2) { shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true) }
-  let!(:pet_3) { shelter_1.pets.create!(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false) }
-  let!(:pet_4) { shelter_1.pets.create(name: 'Annabelle', breed: 'tuxedo shorthair', age: 5, adoptable: true) }
-  let!(:pet_5) { shelter_1.pets.create(name: 'Annie', breed: 'shorthair', age: 3, adoptable: true) }
-  let!(:pet_6) { shelter_1.pets.create(name: 'Barbara Ann', breed: 'ragdoll', age: 3, adoptable: false) }
-  let!(:pet_7) { shelter_1.pets.create(name: 'Soup', breed: 'box turtle', age: 45, adoptable: false) }
+  let!(:pet_1) { shelter_1.pets.create!(
+    name: 'Mr. Pirate', 
+    breed: 'tuxedo shorthair', 
+    age: 5, 
+    adoptable: true) }
+  let!(:pet_2) { shelter_1.pets.create!(
+    name: 'Clawdia', 
+    breed: 'shorthair', 
+    age: 3, 
+    adoptable: true) }
+  let!(:pet_3) { shelter_1.pets.create!(
+    name: 'Ann', 
+    breed: 'ragdoll', 
+    age: 3, 
+    adoptable: false) }
+  let!(:pet_4) { shelter_1.pets.create(
+    name: 'Annabelle', 
+    breed: 'tuxedo shorthair', 
+    age: 5, 
+    adoptable: true) }
+  let!(:pet_5) { shelter_1.pets.create(
+    name: 'Annie', 
+    breed: 'shorthair', 
+    age: 3, 
+    adoptable: true) }
+  let!(:pet_6) { shelter_1.pets.create(
+    name: 'Barbara Ann', 
+    breed: 'ragdoll', 
+    age: 3, 
+    adoptable: false) }
+  let!(:pet_7) { shelter_1.pets.create(
+    name: 'Soup', 
+    breed: 'box turtle', 
+    age: 45, 
+    adoptable: false) }
 
 
   let!(:application1) { Application.create!(
@@ -136,9 +164,11 @@ RSpec.describe 'Application Show Page', type: :feature do
       fill_in(:search, with: "Ann")
       click_button("Submit")
 
-      expect(page).to have_content(pet_1.name)
-      expect(page).to have_content(pet_2.name)
       expect(page).to have_content(pet_3.name)
+      expect(page).to have_content(pet_4.name)
+      expect(page).to have_content(pet_5.name)
+      expect(page).to have_content(pet_6.name)
+      expect(page).to_not have_content(pet_7.name)
     end
   end
 

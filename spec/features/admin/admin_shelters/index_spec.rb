@@ -5,13 +5,41 @@ RSpec.describe 'admin shelters index', type: :feature do
   let!(:shelter_2) { Shelter.create!(name: 'Boulder shelter', city: 'Boulder, CO', foster_program: false, rank: 9) }
   let!(:shelter_3) { Shelter.create(name: 'Denver shelter', city: 'Denver, CO', foster_program: true, rank: 7) }
 
-  let!(:pet_1) { shelter_1.pets.create!(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true) }
-  let!(:pet_2) { shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true) }
-  let!(:pet_3) { shelter_1.pets.create!(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false) }
-  let!(:pet_4) { shelter_2.pets.create!(adoptable: true, age: 1, breed: 'orange tabby shorthair', name: 'Lasagna') }
-  let!(:pet_5) { shelter_2.pets.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald') }
-  let!(:pet_6) { shelter_3.pets.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster') }
-  let!(:pet_7) { shelter_3.pets.create!(adoptable: false, age: 2, breed: 'saint bernard', name: 'Beethoven') }
+  let!(:pet_1) { shelter_1.pets.create!(
+    name: 'Mr. Pirate', 
+    breed: 'tuxedo shorthair', 
+    age: 5, 
+    adoptable: true) }
+  let!(:pet_2) { shelter_1.pets.create!(
+    name: 'Clawdia', 
+    breed: 'shorthair', 
+    age: 3, 
+    adoptable: true) }
+  let!(:pet_3) { shelter_1.pets.create!(
+    name: 'Ann', 
+    breed: 'ragdoll', 
+    age: 3, 
+    adoptable: false) }
+  let!(:pet_4) { shelter_2.pets.create!(
+    adoptable: true, 
+    age: 1, 
+    breed: 'orange tabby shorthair', 
+    name: 'Lasagna') }
+  let!(:pet_5) { shelter_2.pets.create!(
+    adoptable: true, 
+    age: 1, 
+    breed: 'sphynx', 
+    name: 'Lucille Bald') }
+  let!(:pet_6) { shelter_3.pets.create!(
+    adoptable: true, 
+    age: 3, 
+    breed: 'doberman', 
+    name: 'Lobster') }
+  let!(:pet_7) { shelter_3.pets.create!(
+    adoptable: false, 
+    age: 2, 
+    breed: 'saint bernard', 
+    name: 'Beethoven') }
 
   let!(:application1) { Application.create!(
     name: 'Joe Exotic',
